@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  sakuradb-mini:
+    image: sakuradb-mini:latest
+    container_name: sakuradb-mini
+    restart: unless-stopped
+    volumes:
+      - ./sakuradb-mini/config/appsettings.json:/app/appsettings.json:ro
+      - ./sakuradb-mini/sakuradb_config:/app/config
+      - ./sakuradb-mini/sakuradb_data:/data
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+
+volumes:
+  sakuradb_config:
+    name: sakuradb_config
+  sakuradb_data:
+    name: sakuradb_data
+
+# To deploy this stack in Portainer:
+# 1. Build the image first using: docker build -t sakuradb-mini:latest .
+# 2. In Portainer, go to Stacks > Add stack
+# 3. Name your stack (e.g., "sakuradb-mini")
+# 4. Upload this file or paste its content
+# 5. Click "Deploy the stack"

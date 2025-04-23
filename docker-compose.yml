@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  sakuradb-mini:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sakuradb-mini
+    restart: unless-stopped
+    volumes:
+      - ./config/appsettings.json:/app/appsettings.json
+      - sakuradb_data:/data
+    environment:
+      - TZ=UTC
+
+volumes:
+  sakuradb_data:
+    name: sakuradb_data
